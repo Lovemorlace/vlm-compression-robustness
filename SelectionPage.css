@@ -1,0 +1,671 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+/* =============================================================================
+   SelectionPage.css — Écran 1 : Sélection de l'expérience
+   Aesthetic : Research lab dashboard — clean, geometric, data-focused
+   ============================================================================= */
+
+/* ---- CSS Variables ---- */
+:root {
+  --bg-primary: #0b0f14;
+  --bg-secondary: #111820;
+  --bg-card: #161d27;
+  --bg-card-hover: #1c2533;
+  --bg-card-selected: #1a2740;
+  --border-default: #1e2a3a;
+  --border-hover: #2a3a50;
+  --border-selected: #3d7aed;
+  --text-primary: #e8ecf1;
+  --text-secondary: #8899aa;
+  --text-muted: #556677;
+  --accent-blue: #3d7aed;
+  --accent-blue-dim: #2a5bb8;
+  --accent-blue-glow: rgba(61, 122, 237, 0.15);
+  --accent-green: #34c77b;
+  --accent-green-dim: rgba(52, 199, 123, 0.12);
+  --accent-orange: #e8853d;
+  --accent-orange-dim: rgba(232, 133, 61, 0.12);
+  --accent-purple: #9b6dff;
+  --accent-purple-dim: rgba(155, 109, 255, 0.12);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --font-display: "DM Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+/* ---- Reset ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================================
+   Loading / Error states
+   ============================================================================ */
+
+.sel-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 1.25rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.sel-loading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border-default);
+  border-top-color: var(--accent-blue);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.sel-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 1rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.sel-error-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(232, 76, 61, 0.12);
+  color: #e84c3d;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.sel-error h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.sel-error p {
+  color: var(--text-secondary);
+  max-width: 500px;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.sel-btn-retry {
+  margin-top: 0.5rem;
+  padding: 0.6rem 1.5rem;
+  background: var(--accent-blue);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: background var(--transition-fast);
+}
+
+.sel-btn-retry:hover {
+  background: var(--accent-blue-dim);
+}
+
+/* ============================================================================
+   Page layout
+   ============================================================================ */
+
+.sel-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================================
+   Header
+   ============================================================================ */
+
+.sel-header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-default);
+  padding: 2rem 2.5rem 1.5rem;
+}
+
+.sel-header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sel-header-title h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 0.5rem;
+}
+
+.sel-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 0.35rem;
+  line-height: 1.5;
+}
+
+.sel-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-blue);
+}
+
+.sel-logo-icon {
+  font-size: 0.7rem;
+}
+
+/* Stats bar */
+.sel-stats-bar {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-default);
+}
+
+.sel-stat-badge {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.sel-stat-value {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.sel-stat-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+/* ============================================================================
+   Main content
+   ============================================================================ */
+
+.sel-main {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 2.5rem 3rem;
+  width: 100%;
+}
+
+/* ============================================================================
+   Sections
+   ============================================================================ */
+
+.sel-filters-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sel-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.75rem;
+}
+
+.sel-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-primary);
+}
+
+.sel-section-header h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.sel-section-header svg {
+  color: var(--accent-blue);
+  flex-shrink: 0;
+}
+
+.sel-section-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+/* ============================================================================
+   Option cards (Catégories & VLMs)
+   ============================================================================ */
+
+.sel-options-grid {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.sel-options-categories {
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+}
+
+.sel-options-vlm {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.sel-option-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.85rem 1rem;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
+  font-family: var(--font-display);
+  color: var(--text-primary);
+}
+
+.sel-option-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+}
+
+.sel-option-card.selected {
+  background: var(--bg-card-selected);
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 1px var(--accent-blue), 0 0 16px var(--accent-blue-glow);
+}
+
+.sel-option-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.sel-option-desc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.sel-option-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+.sel-option-count {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.sel-option-check {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.8rem;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.sel-option-card.selected .sel-option-check {
+  color: var(--accent-blue);
+  font-size: 0.7rem;
+}
+
+.sel-option-card.accent-compare {
+  border-style: dashed;
+}
+
+.sel-option-card.accent-compare.selected {
+  border-style: solid;
+}
+
+/* ============================================================================
+   Compression type buttons
+   ============================================================================ */
+
+.sel-compression-types {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.sel-comptype-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 1rem;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-display);
+  color: var(--text-primary);
+}
+
+.sel-comptype-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+}
+
+.sel-comptype-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.sel-comptype-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* Active states by color */
+.sel-comptype-btn.active.color-baseline {
+  border-color: var(--accent-green);
+  background: var(--accent-green-dim);
+}
+.sel-comptype-btn.active.color-baseline .sel-comptype-label {
+  color: var(--accent-green);
+}
+
+.sel-comptype-btn.active.color-jpeg {
+  border-color: var(--accent-orange);
+  background: var(--accent-orange-dim);
+}
+.sel-comptype-btn.active.color-jpeg .sel-comptype-label {
+  color: var(--accent-orange);
+}
+
+.sel-comptype-btn.active.color-neural {
+  border-color: var(--accent-purple);
+  background: var(--accent-purple-dim);
+}
+.sel-comptype-btn.active.color-neural .sel-comptype-label {
+  color: var(--accent-purple);
+}
+
+/* ============================================================================
+   Level chips (JPEG QF / Neural quality)
+   ============================================================================ */
+
+.sel-levels-section {
+  padding: 1rem 0 0;
+}
+
+.sel-levels-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.7rem;
+}
+
+.sel-levels-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.sel-level-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  min-width: 80px;
+}
+
+.sel-level-chip:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+}
+
+.sel-level-label {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.sel-level-sub {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+/* Selected states */
+.sel-level-chip.selected.color-jpeg {
+  border-color: var(--accent-orange);
+  background: var(--accent-orange-dim);
+}
+.sel-level-chip.selected.color-jpeg .sel-level-label {
+  color: var(--accent-orange);
+}
+
+.sel-level-chip.selected.color-neural {
+  border-color: var(--accent-purple);
+  background: var(--accent-purple-dim);
+}
+.sel-level-chip.selected.color-neural .sel-level-label {
+  color: var(--accent-purple);
+}
+
+.sel-levels-hint {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.6rem;
+  font-style: italic;
+}
+
+/* ============================================================================
+   Baseline info
+   ============================================================================ */
+
+.sel-baseline-info {
+  padding: 0.9rem 1rem;
+  background: var(--accent-green-dim);
+  border: 1px solid rgba(52, 199, 123, 0.2);
+  border-radius: var(--radius-sm);
+  color: var(--accent-green);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+/* ============================================================================
+   Actions panel (bottom)
+   ============================================================================ */
+
+.sel-actions-panel {
+  margin-top: 2rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  position: sticky;
+  bottom: 1rem;
+  z-index: 10;
+  box-shadow: var(--shadow-elevated);
+}
+
+.sel-selection-summary h3 {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.sel-summary-tags {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.sel-summary-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.65rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+}
+
+.sel-summary-tag-label {
+  color: var(--text-muted);
+}
+
+.sel-summary-tag-value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Action buttons */
+.sel-actions-buttons {
+  display: flex;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.sel-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.25rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.sel-btn svg {
+  flex-shrink: 0;
+}
+
+.sel-btn-secondary {
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-default);
+}
+
+.sel-btn-secondary:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+}
+
+.sel-btn-primary {
+  background: var(--accent-blue);
+  color: #fff;
+}
+
+.sel-btn-primary:hover {
+  background: var(--accent-blue-dim);
+  box-shadow: 0 0 20px var(--accent-blue-glow);
+}
+
+/* ============================================================================
+   Responsive
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .sel-header {
+    padding: 1.5rem 1.25rem 1.25rem;
+  }
+
+  .sel-main {
+    padding: 1.25rem;
+  }
+
+  .sel-stats-bar {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .sel-compression-types {
+    grid-template-columns: 1fr;
+  }
+
+  .sel-options-categories {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+
+  .sel-options-vlm {
+    grid-template-columns: 1fr;
+  }
+
+  .sel-actions-panel {
+    flex-direction: column;
+    align-items: stretch;
+    position: static;
+    box-shadow: var(--shadow-card);
+  }
+
+  .sel-actions-buttons {
+    flex-direction: column;
+  }
+
+  .sel-btn {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,32 @@
+# Environnements
+.env
+__pycache__/
+*.pyc
+*.pyo
+.conda/
+
+# Données volumineuses (ne pas commiter)
+data/raw/
+data/compressed/
+data/doclaynet_download/
+
+# Modèles téléchargés
+*.bin
+*.safetensors
+*.gguf
+
+# Node
+platform/frontend/node_modules/
+platform/frontend/dist/
+
+# Logs
+logs/*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db

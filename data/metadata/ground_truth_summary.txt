@@ -1,0 +1,22 @@
+============================================================
+RAPPORT DE SYNTHÈSE — Ground-Truth DocLayNet
+============================================================
+
+Nombre total d'images : 100
+Images avec texte     : 0
+Images sans texte     : 100
+
+--- Statistiques texte ---
+Caractères (moyenne)  : 0
+Caractères (médiane)  : 0
+Caractères (min)      : 0
+Caractères (max)      : 0
+
+--- Répartition par catégorie documentaire ---
+  Unknown         :   100 images  (moy. 0 chars)
+
+--- Annotations par image ---
+Annotations (moyenne) : 13.1
+Annotations texte (moy) : 0.0
+
+============================================================

@@ -1,0 +1,26 @@
+# ============================================
+# Environnement : vlm_qwen
+# conda create -n vlm_qwen python=3.10
+# ============================================
+
+# Modèle & inférence
+transformers>=4.40.0
+torch>=2.1.0
+torchvision>=0.16.0
+accelerate>=0.30.0
+bitsandbytes>=0.43.0
+
+# Qwen2-VL spécifique
+qwen-vl-utils>=0.0.2
+
+# Traitement d'images
+Pillow>=10.0.0
+
+# Utilitaires
+numpy>=1.24.0
+pandas>=2.0.0
+tqdm>=4.65.0
+
+# Base de données (insertion des prédictions)
+psycopg2-binary>=2.9.9
+sqlalchemy>=2.0.0

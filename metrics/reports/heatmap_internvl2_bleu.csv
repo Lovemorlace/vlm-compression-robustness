@@ -1,0 +1,5 @@
+category,baseline
+excluded_short_gt,0.6459
+long_documents,0.6712
+medium_documents,0.7530
+short_documents,0.7247

@@ -1,0 +1,29 @@
+{
+  "name": "vlm-compression-platform",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.0",
+    "axios": "^1.6.7",
+    "recharts": "^2.12.0",
+    "plotly.js": "^2.30.0",
+    "react-plotly.js": "^2.6.0",
+    "react-compare-slider": "^3.1.0",
+    "diff": "^5.2.0",
+    "@radix-ui/react-select": "^2.0.0",
+    "@radix-ui/react-slider": "^1.1.2",
+    "lucide-react": "^0.344.0",
+    "tailwindcss": "^3.4.1"
+  },
+  "devDependencies": {
+    "vite": "^5.1.0",
+    "@vitejs/plugin-react": "^4.2.1"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  }
+}

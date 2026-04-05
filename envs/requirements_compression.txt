@@ -1,0 +1,25 @@
+# ============================================
+# Environnement : compression
+# conda create -n compression python=3.10
+# ============================================
+
+# Compression neuronale
+compressai==1.2.4
+torch>=2.1.0
+torchvision>=0.16.0
+
+# Traitement d'images
+Pillow>=10.0.0
+opencv-python>=4.8.0
+
+# Métriques image (SSIM calculé à la compression)
+piq>=0.8.0
+
+# Utilitaires
+numpy>=1.24.0
+pandas>=2.0.0
+tqdm>=4.65.0
+
+# Base de données (insertion des métadonnées compression)
+psycopg2-binary>=2.9.9
+sqlalchemy>=2.0.0

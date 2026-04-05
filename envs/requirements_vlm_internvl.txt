@@ -1,0 +1,28 @@
+# ============================================
+# Environnement : vlm_internvl
+# conda create -n vlm_internvl python=3.10
+# ============================================
+
+# Modèle & inférence
+transformers>=4.40.0
+torch>=2.1.0
+torchvision>=0.16.0
+accelerate>=0.30.0
+bitsandbytes>=0.43.0
+
+# InternVL2 spécifique
+timm>=0.9.16
+einops>=0.7.0
+sentencepiece>=0.2.0
+
+# Traitement d'images
+Pillow>=10.0.0
+
+# Utilitaires
+numpy>=1.24.0
+pandas>=2.0.0
+tqdm>=4.65.0
+
+# Base de données (insertion des prédictions)
+psycopg2-binary>=2.9.9
+sqlalchemy>=2.0.0
