@@ -224,7 +224,7 @@ Suivre cet ordre strict — chaque étape dépend de la précédente.
 # Terminal 1 — Backend
 conda activate platform
 cd platform/backend
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
 
 # Terminal 2 — Frontend
 cd platform/frontend
