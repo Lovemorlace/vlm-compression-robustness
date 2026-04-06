@@ -30,3 +30,5 @@ logs/*.log
 # OS
 .DS_Store
 Thumbs.db
+data/metadata/train.json
+data/metadata/val.json
